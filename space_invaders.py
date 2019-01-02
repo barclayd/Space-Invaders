@@ -56,7 +56,7 @@ bullet.shapesize(0.5, 0.5)
 bullet_state = "ready"
 
 # add a number of enemies
-number_of_enemies = 5
+number_of_enemies = 7
 enemies = []
 for i in range(number_of_enemies):
     enemies.append(turtle.Turtle())
@@ -78,14 +78,14 @@ bullet_speed = 40
 
 def move_left():
     x = player.xcor()
-    if x > -280:
+    if x > -275:
         x -= player_speed
     player.setx(x)
 
 
 def move_right():
     x = player.xcor()
-    if x < 280:
+    if x < 275:
         x += player_speed
     player.setx(x)
 
