@@ -58,7 +58,7 @@ for enemy in enemies:
     enemy.color("red")
     enemy.shape("square")
     enemy.penup()
-    enemy.speed(1)
+    enemy.speed(0)
     x = random.randint(-250, 200)
     y = random.randint(100, 250)
     enemy.setposition(x, y)
@@ -93,7 +93,7 @@ def fire_bullet():
 
 def isCollision(t1, t2):
     distance = math.sqrt(math.pow(t1.xcor()-t2.xcor(), 2) + math.pow(t1.ycor()-t2.ycor(), 2))
-    if distance < 20:
+    if distance < 30:
         return True
     else:
         return False
@@ -106,8 +106,16 @@ turtle.onkey(move_right, "Right")
 turtle.onkey(fire_bullet, "space")
 
 
-# game score
-game_score = 0
+# game scor e
+score = 0
+game_score = "Score: %s" % score
+score_pen = turtle.Turtle()
+score_pen.speed(0)
+score_pen.color("white")
+score_pen.penup()
+score_pen.setposition(-290, 280)
+score_pen.write(game_score, False, align="left", font=("Mono", 14, "bold "))
+score_pen.hideturtle()
 # ASCII Art
 game_over = """
 
@@ -138,21 +146,25 @@ while True:
 
         # move enemy left, right and down
         if enemy.xcor() > 280:
+            for e in enemies:
+                y = e.ycor()
+                y -= 40
+                e.sety(y)
             enemy_speed *= -1
-            y = enemy.ycor()
-            y -= 40
-            enemy.sety(y)
 
         if enemy.xcor() < -280:
-            y = enemy.ycor()
-            y -= 40
+            for e in enemies:
+                y = e.ycor()
+                y -= 40
+                e.sety(y)
             enemy_speed *= -1
-            enemy.sety(y)
 
         # check for collision(bullet, enemy)
         if isCollision(bullet, enemy):
-            game_score += 1
-            print(game_score)
+            score += 10
+            game_score = "Score: %s" % score
+            score_pen.clear()
+            score_pen.write(game_score, False, align="left", font=("Mono", 14, "bold "))
             # reset bullet
             bullet.hideturtle()
             bullet_state = "ready"
@@ -164,8 +176,6 @@ while True:
 
         # check for collision(player, enemy)
         if isCollision(player, enemy):
-            game_score += 1
-            print(game_score)
             # reset player
             player.hideturtle()
             enemy.hideturtle()
