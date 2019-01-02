@@ -1,4 +1,5 @@
 import turtle
+import math
 import os
 
 # set up screen
@@ -85,11 +86,42 @@ def fire_bullet():
         bullet.showturtle()
 
 
+def isCollision(t1, t2):
+    distance = math.sqrt(math.pow(t1.xcor()-t2.xcor(), 2) + math.pow(t1.ycor()-t2.ycor(), 2))
+    if distance < 15:
+        return True
+    else:
+        return False
+
+
+
 # keybindings
 turtle.listen()
 turtle.onkey(move_left, "Left")
 turtle.onkey(move_right, "Right")
 turtle.onkey(fire_bullet, "space")
+
+
+# game score
+game_score = 0
+# ASCI art
+game_over = """
+
+ ________  ________  _____ ______   _______           ________  ___      ___ _______   ________  ___       
+|\   ____\|\   __  \|\   _ \  _   \|\  ___ \         |\   __  \|\  \    /  /|\  ___ \ |\   __  \|\  \      
+\ \  \___|\ \  \|\  \ \  \\\__\ \  \ \   __/|        \ \  \|\  \ \  \  /  / | \   __/|\ \  \|\  \ \  \     
+ \ \  \  __\ \   __  \ \  \\|__| \  \ \  \_|/__       \ \  \\\  \ \  \/  / / \ \  \_|/_\ \   _  _\ \  \    
+  \ \  \|\  \ \  \ \  \ \  \    \ \  \ \  \_|\ \       \ \  \\\  \ \    / /   \ \  \_|\ \ \  \\  \\ \__\   
+   \ \_______\ \__\ \__\ \__\    \ \__\ \_______\       \ \_______\ \__/ /     \ \_______\ \__\\ _\\|__|   
+    \|_______|\|__|\|__|\|__|     \|__|\|_______|        \|_______|\|__|/       \|_______|\|__|\|__|   ___ 
+                                                                                                      |\__\
+                                                                                                      \|__|
+                                                                                                           
+
+ 
+"""
+
+
 # main game loop
 while True:
 
@@ -116,11 +148,30 @@ while True:
         y = bullet.ycor()
         y += bullet_speed
         bullet.sety(y)
+
+    # check if bullet has gone off the screen
     if bullet.ycor() > 275:
         bullet.hideturtle()
         bullet_state = "ready"
 
+    # check for collision(bullet, enemy)
+    if isCollision(bullet, enemy):
+        game_score += 1
+        print(game_score)
+        # reset bullet
+        bullet.hideturtle()
+        bullet_state = "ready"
+        bullet.setposition(player.xcor(), player.ycor())
+        # reset enemy
+        enemy.setposition(-200, 250)
 
-
-
+    # check for collision(player, enemy)
+    if isCollision(player, enemy):
+        game_score += 1
+        print(game_score)
+        # reset player
+        player.hideturtle()
+        enemy.hideturtle()
+        print(game_over)
+        break
 
