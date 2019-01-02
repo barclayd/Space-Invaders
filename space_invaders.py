@@ -1,6 +1,7 @@
 import turtle
 import math
 import random
+import os
 
 # set up screen
 wn = turtle.Screen()
@@ -65,7 +66,8 @@ for enemy in enemies:
     enemy.penup()
     enemy.speed(0)
     x = random.randint(-250, 200)
-    y = random.randint(100, 250)
+    # y = random.randint(100, 250)
+    y = -100
     enemy.setposition(x, y)
 
 # speed controls
@@ -92,6 +94,7 @@ def fire_bullet():
     global bullet_state
     if bullet_state == "ready":
         bullet_state = "fire"
+        os.system("afplay ./audio/bullet.wav&")
         bullet.setposition(player.xcor(), player.ycor() + 10)
         bullet.showturtle()
 
@@ -153,7 +156,7 @@ game_over = """
 # title
 title = turtle.Turtle()
 title.speed(0)
-title.color("blue")
+title.color("white")
 title.penup()
 title.setposition(0, 305)
 title.write("Space Invaders", False, align="center", font=("Mono", 24, "bold"))
@@ -186,6 +189,7 @@ while True:
 
         # check for collision(bullet, enemy)
         if isCollision(bullet, enemy):
+            os.system("afplay ./audio/explosion.wav&")
             score += 10
             game_score = "Score: %s" % score
             aliens_killed += 1
@@ -206,6 +210,7 @@ while True:
         # check for collision(player, enemy)
         if isCollision(player, enemy):
             # reset player
+            os.system("afplay ./audio/collision.wav&")
             player.hideturtle()
             enemy.hideturtle()
             print(game_over)
