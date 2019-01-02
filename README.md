@@ -28,9 +28,9 @@ _Please note that sound currently only works when run on Mac/Linux_
 
 ### To get sound working on Windows:
 
-Replace ```os.system("afplay ./audio/bullet.wav&")``` with ```winsound.PlaySound("./audio/bullet", winsound.SND_ASYNC)```
-Replace ```os.system("afplay ./audio/explosion.wav&")``` with ```winsound.PlaySound("./audio/explosion", winsound.SND_ASYNC)```
-Replace ```os.system("afplay ./audio/collision.wav&")``` with ```winsound.PlaySound("./audio/collision", winsound.SND_ASYNC)```
+- Replace ```os.system("afplay ./audio/bullet.wav&")``` with ```winsound.PlaySound("./audio/bullet", winsound.SND_ASYNC)```
+- Replace ```os.system("afplay ./audio/explosion.wav&")``` with ```winsound.PlaySound("./audio/explosion", winsound.SND_ASYNC)```
+- Replace ```os.system("afplay ./audio/collision.wav&")``` with ```winsound.PlaySound("./audio/collision", winsound.SND_ASYNC)```
 
 ### Features to be Added
 
