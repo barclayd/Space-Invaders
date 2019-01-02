@@ -6,6 +6,11 @@ import random
 wn = turtle.Screen()
 wn.bgcolor("black")
 wn.title("Space Invaders")
+wn.bgpic("./img/space.gif")
+
+# register shapes
+turtle.register_shape("player.gif")
+turtle.register_shape("enemy.gif")
 
 # border
 border_pen = turtle.Turtle()
@@ -25,7 +30,7 @@ border_pen.hideturtle()
 # player
 player = turtle.Turtle()
 player.color("green")
-player.shape("triangle")
+player.shape("player.gif")
 player.penup()
 player.speed(0)
 player.setposition(0, -250)
@@ -56,7 +61,7 @@ for i in range(number_of_enemies):
     enemies.append(turtle.Turtle())
 for enemy in enemies:
     enemy.color("red")
-    enemy.shape("square")
+    enemy.shape("enemy.gif")
     enemy.penup()
     enemy.speed(0)
     x = random.randint(-250, 200)
@@ -106,16 +111,28 @@ turtle.onkey(move_right, "Right")
 turtle.onkey(fire_bullet, "space")
 
 
-# game scor e
+# game score
 score = 0
+aliens_killed = 0
+aliens_score = "Aliens killed: %s" % aliens_killed
 game_score = "Score: %s" % score
 score_pen = turtle.Turtle()
 score_pen.speed(0)
 score_pen.color("white")
 score_pen.penup()
-score_pen.setposition(-290, 280)
-score_pen.write(game_score, False, align="left", font=("Mono", 14, "bold "))
+score_pen.setposition(-290, 305)
+score_pen.write(game_score, False, align="left", font=("Mono", 14, "bold"))
 score_pen.hideturtle()
+
+aliens_pen = turtle.Turtle()
+aliens_pen.speed(0)
+aliens_pen.color("red")
+aliens_pen.penup()
+aliens_pen.setposition(-290, 280)
+aliens_pen.write(aliens_score, False, align="left", font=("Mono", 14, "bold"))
+aliens_pen.hideturtle()
+
+
 # ASCII Art
 game_over = """
 
@@ -133,6 +150,14 @@ game_over = """
  
 """
 
+# title
+title = turtle.Turtle()
+title.speed(0)
+title.color("blue")
+title.penup()
+title.setposition(0, 305)
+title.write("Space Invaders", False, align="center", font=("Mono", 24, "bold"))
+title.hideturtle()
 
 # main game loop
 while True:
@@ -163,8 +188,12 @@ while True:
         if isCollision(bullet, enemy):
             score += 10
             game_score = "Score: %s" % score
+            aliens_killed += 1
+            aliens_score = "Aliens killed: %s" % aliens_killed
             score_pen.clear()
-            score_pen.write(game_score, False, align="left", font=("Mono", 14, "bold "))
+            aliens_pen.clear()
+            score_pen.write(game_score, False, align="left", font=("Mono", 14, "bold"))
+            aliens_pen.write(aliens_score, False, align="left", font=("Mono", 14, "bold"))
             # reset bullet
             bullet.hideturtle()
             bullet_state = "ready"
