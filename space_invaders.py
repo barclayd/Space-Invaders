@@ -66,8 +66,7 @@ for enemy in enemies:
     enemy.penup()
     enemy.speed(0)
     x = random.randint(-250, 200)
-    # y = random.randint(100, 250)
-    y = -100
+    y = random.randint(100, 250)
     enemy.setposition(x, y)
 
 # speed controls
