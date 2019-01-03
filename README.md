@@ -9,7 +9,7 @@ Built using Python and Turtle.
 <img width="832" alt="SpaceInvaders Game Play" src="https://user-images.githubusercontent.com/39765499/50606139-92243e00-0ebc-11e9-9509-d91dcb12a1ba.png">
 
 
-### How to Run
+### How to Run (Mac & Linux)
 
 ````
 $ git clone https://github.com/barclayd/SpaceInvaders.git
@@ -18,19 +18,20 @@ $ python space_invaders.py
 ````
 Space Invaders game will now open in a new window and you can start playing!
 
+### How to Run (Windows Only)
+
+````
+$ git clone https://github.com/barclayd/SpaceInvaders.git
+$ cd SpaceInvaders
+$ python space_invaders_windows_only.py
+````
+
 ##### Controls
 
 - <kbd>left</kbd>: move left
 - <kbd>right</kbd>: move right
 - <kbd>space</kbd>: fire bullet
 
-_Please note that sound currently only works when run on Mac/Linux_
-
-### To get sound working on Windows:
-
-- Replace ```os.system("afplay ./audio/bullet.wav&")``` with ```winsound.PlaySound("./audio/bullet", winsound.SND_ASYNC)```
-- Replace ```os.system("afplay ./audio/explosion.wav&")``` with ```winsound.PlaySound("./audio/explosion", winsound.SND_ASYNC)```
-- Replace ```os.system("afplay ./audio/collision.wav&")``` with ```winsound.PlaySound("./audio/collision", winsound.SND_ASYNC)```
 
 ### Features to be Added
 
@@ -43,5 +44,5 @@ _Please note that sound currently only works when run on Mac/Linux_
 * Game music to run throughout (optional)
 * Settings for sound and easy/medium/hard, choose length of game
 * Get extra time for killing space invaders and more points based on timing
-* Multiplier
+* Multiplier score bonuses
 * Health bonuses and set a number of lives
