@@ -8,6 +8,7 @@ wn = turtle.Screen()
 wn.bgcolor("black")
 wn.title("Space Invaders")
 wn.bgpic("./img/space.gif")
+wn.tracer(0)
 
 # register shapes
 turtle.register_shape("player.gif")
@@ -135,22 +136,7 @@ aliens_pen.write(aliens_score, False, align="left", font=("Mono", 14, "bold"))
 aliens_pen.hideturtle()
 
 
-# ASCII Art
-game_over = """
-
- ________  ________  _____ ______   _______           ________  ___      ___ _______   ________  ___       
-|\   ____\|\   __  \|\   _ \  _   \|\  ___ \         |\   __  \|\  \    /  /|\  ___ \ |\   __  \|\  \      
-\ \  \___|\ \  \|\  \ \  \\\__\ \  \ \   __/|        \ \  \|\  \ \  \  /  / | \   __/|\ \  \|\  \ \  \     
- \ \  \  __\ \   __  \ \  \\|__| \  \ \  \_|/__       \ \  \\\  \ \  \/  / / \ \  \_|/_\ \   _  _\ \  \    
-  \ \  \|\  \ \  \ \  \ \  \    \ \  \ \  \_|\ \       \ \  \\\  \ \    / /   \ \  \_|\ \ \  \\  \\ \__\   
-   \ \_______\ \__\ \__\ \__\    \ \__\ \_______\       \ \_______\ \__/ /     \ \_______\ \__\\ _\\|__|   
-    \|_______|\|__|\|__|\|__|     \|__|\|_______|        \|_______|\|__|/       \|_______|\|__|\|__|   ___ 
-                                                                                                      |\__\
-                                                                                                      \|__|
-                                                                                                           
-
- 
-"""
+game_over = "Game over! Try again?"
 
 # title
 title = turtle.Turtle()
@@ -163,7 +149,7 @@ title.hideturtle()
 
 # main game loop
 while True:
-
+    wn.update()
     for enemy in enemies:
 
         # move enemy
