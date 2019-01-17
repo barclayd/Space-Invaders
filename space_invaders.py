@@ -8,11 +8,11 @@ wn = turtle.Screen()
 wn.bgcolor("black")
 wn.title("Space Invaders")
 wn.bgpic("./img/space.gif")
-wn.tracer( 0)
+wn.tracer(0)
 
 # register shapes
-turtle.register_shape("player.gif")
-turtle.register_shape("enemy.gif")
+wn.register_shape("player.gif")
+wn.register_shape("enemy.gif")
 
 # border
 border_pen = turtle.Turtle()
@@ -99,7 +99,7 @@ def fire_bullet():
         bullet.showturtle()
 
 
-def isCollision(t1, t2):
+def is_collision(t1, t2):
     distance = math.sqrt(math.pow(t1.xcor()-t2.xcor(), 2) + math.pow(t1.ycor()-t2.ycor(), 2))
     if distance < 30:
         return True
@@ -108,10 +108,10 @@ def isCollision(t1, t2):
 
 
 # keybindings
-turtle.listen()
-turtle.onkey(move_left, "Left")
-turtle.onkey(move_right, "Right")
-turtle.onkey(fire_bullet, "space")
+wn.listen()
+wn.onkeypress(move_left, "Left")
+wn.onkeypress(move_right, "Right")
+wn.onkeypress(fire_bullet, "space")
 
 
 # game score
@@ -173,7 +173,7 @@ while True:
             enemy_speed *= -1
 
         # check for collision(bullet, enemy)
-        if isCollision(bullet, enemy):
+        if is_collision(bullet, enemy):
             os.system("afplay ./audio/explosion.wav&")
             score += 10
             game_score = "Score: %s" % score
@@ -193,7 +193,7 @@ while True:
             enemy.setposition(x, y)
 
         # check for collision(player, enemy)
-        if isCollision(player, enemy):
+        if is_collision(player, enemy):
             # reset player
             os.system("afplay ./audio/collision.wav&")
             player.hideturtle()
